@@ -1,0 +1,74 @@
+﻿.headee{
+    padding-bottom:20px;
+}
+.footer{
+    margin-top:50px;
+}
+/* Home Page (Trang chủ) */
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.card-subtitle {
+    text-align: center;
+}
+
+.center-image {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    aspect-ratio: 16/9;
+}
+
+
+/* Trong tệp CSS của bạn (Layout.css) */
+.khuyenmai {
+    overflow: hidden;
+    white-space: nowrap;
+    padding-top: 50px;
+    width: 1000px;
+    max-width: 100%;
+    box-sizing: border-box;
+    margin: 0 auto;
+}
+
+.pos1 {
+    text-align: center; /* Căn giữa nội dung trong .pos1 */
+}
+
+.block_title {
+    text-align:center;
+    font-size: 24px; /* Kích thước chữ cho tiêu đề */
+    font-weight: bold; /* Chữ đậm cho tiêu đề */
+    
+}
+
+.img_khuyenmai {
+    justify-content: space-around; /* Các hình ảnh cách nhau một khoảng đều */
+    display: flex;
+    animation: slide 10s linear infinite;
+}
+@keyframes slide {
+    0% {
+        transform: translateX(100%);
+    }
+
+    50% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-100%);
+    }
+}
+.img_khuyenmai img {
+    width: 500px; /* Kích thước ảnh */
+    height: auto; /* Giữ tỷ lệ khung hình ảnh */
+    border: 1px solid #ddd; /* Đường viền xung quanh ảnh */
+    /*border-radius: 30px;*/ /* Góc bo tròn cho ảnh */
+    margin: 10px; /* Khoảng cách giữa các ảnh */
+
+}
