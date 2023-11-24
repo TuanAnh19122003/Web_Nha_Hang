@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PagedList;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -15,9 +16,12 @@ namespace Web_Nha_Hang.Areas.AdminArea.Controllers
         private DBConnectNhaHang db = new DBConnectNhaHang();
 
         // GET: AdminArea/Danhmuc
-        public ActionResult Index()
+        public ActionResult Index(int? page)
         {
-            return View(db.Danhmucs.ToList());
+            int pageSize = 5; // Số lượng sản phẩm trên mỗi trang
+            int pageNumber = (page ?? 1);
+            var model = db.Danhmucs.OrderBy(b => b.madm).ToPagedList(pageNumber, pageSize);
+            return View(model);
         }
 
         // GET: AdminArea/Danhmuc/Details/5

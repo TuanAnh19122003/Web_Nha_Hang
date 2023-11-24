@@ -1,9 +1,22 @@
-﻿@model IEnumerable<Web_Nha_Hang.Models.Nhanvien>
-
+﻿@model PagedList.IPagedList<Web_Nha_Hang.Models.Nhanvien>
+@using PagedList.Mvc;
 @{
     ViewBag.Title = "Index";
     Layout = "~/Areas/AdminArea/Views/Shared/_LayoutAdmin.cshtml";
 }
+<style>
+    /* CSS nằm ở đây hoặc bạn có thể đặt trong file CSS riêng */
+    .pagination {
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        padding: 10px 0; /* Điều chỉnh giá trị này để thay đổi khoảng cách giữa các số trang */
+    }
+
+    .pagination a {
+        margin: 0 20px; /* Khoảng cách giữa các số trang */
+    }
+</style>
 <div class="content-wrapper">
     <!-- Main content -->
     <section class="content" style="padding-top:30px">
@@ -19,65 +32,75 @@
                 </div>
             </div>
             <div class="card-body">
-                <table class="table table-bordered">
-                    <tr>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Chucvu.tencv)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.tennv)
-                        </th>
-                        <th>
-                            Hình ảnh
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.sdt)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.diachi)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.gioitinh)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.ngsinh)
-                        </th>
-                        <th>Chức năng</th>
-                    </tr>
-
-                    @foreach (var item in Model)
-                    {
+                @if (Model.Any())
+                {
+                    <table class="table table-bordered">
                         <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Chucvu.tencv)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.tennv)
-                            </td>
-                            <td>
-                                <img src="@Url.Content("~/Uploads/" + item.anh)" alt="Image" class="img-thumbnail" width="100" height="100" />
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.sdt)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.diachi)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.gioitinh)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.ngsinh)
-                            </td>
-                            <td>
-                                <a href="@Url.Action("Edit", new { id = item.manv })" class="btn btn-warning"><i class="fas fa-edit"></i></a>
-                                <a href="@Url.Action("Details", new { id = item.manv })" class="btn btn-info"><i class="fas fa-info"></i></a>
-                                <a href="@Url.Action("Delete", new { id = item.manv })" class="btn btn-danger"><i class="fas fa-trash"></i></a>
-                            </td>
+                            <th>
+                                @Html.DisplayNameFor(model => model.First().Chucvu.tencv)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.First().tennv)
+                            </th>
+                            <th>
+                                Hình ảnh
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.First().sdt)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.First().diachi)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.First().gioitinh)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.First().ngsinh)
+                            </th>
+                            <th>Chức năng</th>
                         </tr>
-                    }
 
-                </table>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Chucvu.tencv)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.tennv)
+                                </td>
+                                <td>
+                                    <img src="@Url.Content("~/Uploads/" + item.anh)" alt="Image" class="img-thumbnail" width="100" height="100" />
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.sdt)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.diachi)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.gioitinh)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ngsinh)
+                                </td>
+                                <td>
+                                    <a href="@Url.Action("Edit", new { id = item.manv })" class="btn btn-warning"><i class="fas fa-edit"></i></a>
+                                    <a href="@Url.Action("Details", new { id = item.manv })" class="btn btn-info"><i class="fas fa-info"></i></a>
+                                    <a href="@Url.Action("Delete", new { id = item.manv })" class="btn btn-danger"><i class="fas fa-trash"></i></a>
+                                </td>
+                            </tr>
+                        }
+
+                    </table>
+                    <div class="pagination">
+                        @Html.PagedListPager(Model, page => Url.Action("Index", new { page }), PagedListRenderOptions.OnlyShowFivePagesAtATime)
+                    </div>
+                }
+                else
+                {
+                    <p>Không có dữ liệu.</p>
+                }
             </div>
         </div>
     </section>

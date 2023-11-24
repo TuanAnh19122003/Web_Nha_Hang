@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PagedList;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -6,6 +7,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI;
 using Web_Nha_Hang.Models;
 
 namespace Web_Nha_Hang.Areas.AdminArea.Controllers
@@ -15,10 +17,12 @@ namespace Web_Nha_Hang.Areas.AdminArea.Controllers
         private DBConnectNhaHang db = new DBConnectNhaHang();
 
         // GET: AdminArea/Hoadon
-        public ActionResult Index()
+        public ActionResult Index(int? page)
         {
-            var hoadons = db.Hoadons.Include(h => h.Khachhang).Include(h => h.Nhanvien);
-            return View(hoadons.ToList());
+            int pageSize = 5;
+            int pageNumber = page ?? 1;
+            var model = db.Hoadons.Include(h => h.Khachhang).Include(h => h.Nhanvien).OrderBy(c => c.mahd).ToPagedList(pageNumber, pageSize);
+            return View(model);
         }
 
         // GET: AdminArea/Hoadon/Details/5

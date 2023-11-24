@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PagedList;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -6,6 +7,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI;
 using Web_Nha_Hang.Models;
 
 namespace Web_Nha_Hang.Areas.AdminArea.Controllers
@@ -15,10 +17,12 @@ namespace Web_Nha_Hang.Areas.AdminArea.Controllers
         private DBConnectNhaHang db = new DBConnectNhaHang();
 
         // GET: AdminArea/Datban
-        public ActionResult Index()
+        public ActionResult Index(int? page)
         {
-            var datbans = db.Datbans.Include(d => d.Ban);
-            return View(datbans.ToList());
+            int pageSize = 5; // Số lượng sản phẩm trên mỗi trang
+            int pageNumber = (page ?? 1);
+            var model = db.Datbans.Include(d => d.Ban).OrderBy(b => b.madb).ToPagedList(pageNumber, pageSize);
+            return View(model);
         }
 
         // GET: AdminArea/Datban/Details/5

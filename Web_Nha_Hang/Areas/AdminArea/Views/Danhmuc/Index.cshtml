@@ -1,15 +1,27 @@
-﻿@model IEnumerable<Web_Nha_Hang.Models.Danhmuc>
-
+﻿@model PagedList.IPagedList<Web_Nha_Hang.Models.Danhmuc>
+@using PagedList.Mvc;
 @{
     ViewBag.Title = "Index";
     Layout = "~/Areas/AdminArea/Views/Shared/_LayoutAdmin.cshtml";
 }
+<style>
+    /* CSS nằm ở đây hoặc bạn có thể đặt trong file CSS riêng */
+    .pagination {
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        padding: 10px 0; /* Điều chỉnh giá trị này để thay đổi khoảng cách giữa các số trang */
+    }
 
+    .pagination a {
+        margin: 0 20px; /* Khoảng cách giữa các số trang */
+    }
+</style>
 <h2>Index</h2>
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
     <!-- Main content -->
-    <section class="content"  style="padding-top:30px">
+    <section class="content" style="padding-top:30px">
         <!-- Default box -->
         <div class="card">
             <div class="card-header">
@@ -23,27 +35,37 @@
                 <div class="text-right">
                     <a href="@Url.Action("Create","Danhmuc")" class="btn btn-success"><i class="fas fa-plus"></i> Thêm</a>
                 </div>
-                <table class="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th>@Html.DisplayNameFor(model => model.tendm)</th>
-                            <th>Chức năng</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var item in Model)
-                        {
+                @if (Model.Any())
+                {
+                    <table class="table table-bordered">
+                        <thead>
                             <tr>
-                                <td>@Html.DisplayFor(modelItem => item.tendm)</td>
-                                <td>
-                                    <a href="@Url.Action("Edit", new { id = item.madm })" class="btn btn-warning"><i class="fas fa-edit"></i></a>
-                                    <a href="@Url.Action("Details", new { id = item.madm })" class="btn btn-info"><i class="fas fa-info"></i></a>
-                                    <a href="@Url.Action("Delete", new { id = item.madm })" class="btn btn-danger"><i class="fas fa-trash"></i></a>
-                                </td>
+                                <th>@Html.DisplayNameFor(model => model.First().tendm)</th>
+                                <th>Chức năng</th>
                             </tr>
-                        }
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>@Html.DisplayFor(modelItem => item.tendm)</td>
+                                    <td>
+                                        <a href="@Url.Action("Edit", new { id = item.madm })" class="btn btn-warning"><i class="fas fa-edit"></i></a>
+                                        <a href="@Url.Action("Details", new { id = item.madm })" class="btn btn-info"><i class="fas fa-info"></i></a>
+                                        <a href="@Url.Action("Delete", new { id = item.madm })" class="btn btn-danger"><i class="fas fa-trash"></i></a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                    <div class="pagination">
+                        @Html.PagedListPager(Model, page => Url.Action("Index", new { page }), PagedListRenderOptions.OnlyShowFivePagesAtATime)
+                    </div>
+                }
+                else
+                {
+                    <p>Không có dữ liệu.</p>
+                }
             </div>
             <!-- /.card-body -->
         </div>

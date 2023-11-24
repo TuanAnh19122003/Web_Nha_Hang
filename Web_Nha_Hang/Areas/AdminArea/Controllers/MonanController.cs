@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PagedList;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -17,10 +18,12 @@ namespace Web_Nha_Hang.Areas.AdminArea.Controllers
         private DBConnectNhaHang db = new DBConnectNhaHang();
 
         // GET: AdminArea/Monan
-        public ActionResult Index()
+        public ActionResult Index(int? page)
         {
-            var monans = db.Monans.Include(m => m.Danhmuc);
-            return View(monans.ToList());
+            int pageSize = 5; // Số lượng sản phẩm trên mỗi trang
+            int pageNumber = (page ?? 1);
+            var model = db.Monans.Include(m => m.Danhmuc).OrderBy(b => b.mamon).ToPagedList(pageNumber, pageSize);
+            return View(model);
         }
 
         // GET: AdminArea/Monan/Details/5

@@ -1,12 +1,25 @@
-﻿@model IEnumerable<Web_Nha_Hang.Models.Datban>
-
+﻿@model PagedList.IPagedList<Web_Nha_Hang.Models.Datban>
+@using PagedList.Mvc;
 @{
     ViewBag.Title = "Index";
     Layout = "~/Areas/AdminArea/Views/Shared/_LayoutAdmin.cshtml";
 }
+<style>
+    /* CSS nằm ở đây hoặc bạn có thể đặt trong file CSS riêng */
+    .pagination {
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        padding: 10px 0; /* Điều chỉnh giá trị này để thay đổi khoảng cách giữa các số trang */
+    }
+
+    .pagination a {
+        margin: 0 20px; /* Khoảng cách giữa các số trang */
+    }
+</style>
 <div class="content-wrapper">
     <!-- Main content -->
-    <section class="content"  style="padding-top:30px">
+    <section class="content" style="padding-top:30px">
 
         <!-- Default box -->
         <div class="card">
@@ -21,59 +34,69 @@
                 </div>
             </div>
             <div class="card-body">
-                <table class="table table-bordered">
-                    <tr>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Ban.tenban)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.hoten)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.sdt)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.soluongkh)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.ngaydat)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.ghichu)
-                        </th>
-                        <th>Chức năng</th>
-                    </tr>
-
-                    @foreach (var item in Model)
-                    {
+                @if (Model.Any())
+                {
+                    <table class="table table-bordered">
                         <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Ban.tenban)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.hoten)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.sdt)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.soluongkh)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.ngaydat)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.ghichu)
-                            </td>
-                            <td>
-                                <a href="@Url.Action("Edit", new { id = item.madb })" class="btn btn-warning"><i class="fas fa-edit"></i></a>
-                                <a href="@Url.Action("Details", new { id = item.madb })" class="btn btn-info"><i class="fas fa-info"></i></a>
-                                <a href="@Url.Action("Delete", new { id = item.madb })" class="btn btn-danger"><i class="fas fa-trash"></i></a>
-                            </td>
+                            <th>
+                                @Html.DisplayNameFor(model => model.First().Ban.tenban)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.First().hoten)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.First().sdt)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.First().soluongkh)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.First().ngaydat)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.First().ghichu)
+                            </th>
+                            <th>Chức năng</th>
                         </tr>
-                    }
 
-                </table>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Ban.tenban)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.hoten)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.sdt)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.soluongkh)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ngaydat)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ghichu)
+                                </td>
+                                <td>
+                                    <a href="@Url.Action("Edit", new { id = item.madb })" class="btn btn-warning"><i class="fas fa-edit"></i></a>
+                                    <a href="@Url.Action("Details", new { id = item.madb })" class="btn btn-info"><i class="fas fa-info"></i></a>
+                                    <a href="@Url.Action("Delete", new { id = item.madb })" class="btn btn-danger"><i class="fas fa-trash"></i></a>
+                                </td>
+                            </tr>
+                        }
+
+                    </table>
+                    <div class="pagination">
+                        @Html.PagedListPager(Model, page => Url.Action("Index", new { page }), PagedListRenderOptions.OnlyShowFivePagesAtATime)
+                    </div>
+                }
+                else
+                {
+                    <p>Không có dữ liệu.</p>
+                }
             </div>
         </div>
     </section>

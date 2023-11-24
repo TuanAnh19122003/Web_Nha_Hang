@@ -1,9 +1,22 @@
-﻿@model IEnumerable<Web_Nha_Hang.Models.Chitiethd>
-
+﻿@model PagedList.IPagedList<Web_Nha_Hang.Models.Chitiethd>
+@using PagedList.Mvc;
 @{
     ViewBag.Title = "Index";
     Layout = "~/Areas/AdminArea/Views/Shared/_LayoutAdmin.cshtml";
 }
+<style>
+    /* CSS nằm ở đây hoặc bạn có thể đặt trong file CSS riêng */
+    .pagination {
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        padding: 20px 0; /* Điều chỉnh giá trị này để thay đổi khoảng cách giữa các số trang */
+    }
+
+        .pagination a {
+            margin: 0 20px; /* Khoảng cách giữa các số trang */
+        }
+</style>
 <div class="content-wrapper">
     <!-- Main content -->
     <section class="content" style="padding-top:30px">
@@ -21,53 +34,62 @@
                 </div>
             </div>
             <div class="card-body">
-                <table class="table">
-                    <tr>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Hoadon.mahd)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.mamon)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.soluong)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.dongia)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.thanhtien)
-                        </th>
-                        <th></th>
-                    </tr>
-
-                    @foreach (var item in Model)
-                    {
+                @if (Model.Any())
+                {
+                    <table class="table table-bordered">
                         <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Hoadon.mahd)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.mamon)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.soluong)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.dongia)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.thanhtien)
-                            </td>
-                            <td>
-                                <a href="@Url.Action("Edit", new { id = item.macthd })" class="btn btn-warning"><i class="fas fa-edit"></i></a>
-                                <a href="@Url.Action("Details", new { id = item.macthd })" class="btn btn-info"><i class="fas fa-info"></i></a>
-                                <a href="@Url.Action("Delete", new { id = item.macthd })" class="btn btn-danger"><i class="fas fa-trash"></i></a>
-                            </td>
+                            <th>
+                                @Html.DisplayNameFor(model => model.First().Hoadon.mahd)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.First().mamon)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.First().soluong)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.First().dongia)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.First().thanhtien)
+                            </th>
+                            <th>Chức năng</th>
                         </tr>
-                    }
 
-                </table>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Hoadon.mahd)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.mamon)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.soluong)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.dongia)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.thanhtien)
+                                </td>
+                                <td>
+                                    <a href="@Url.Action("Edit", new { id = item.macthd })" class="btn btn-warning"><i class="fas fa-edit"></i></a>
+                                    <a href="@Url.Action("Details", new { id = item.macthd })" class="btn btn-info"><i class="fas fa-info"></i></a>
+                                    <a href="@Url.Action("Delete", new { id = item.macthd })" class="btn btn-danger"><i class="fas fa-trash"></i></a>
+                                </td>
+                            </tr>
+                        }
+                    </table>
+                    <div class="pagination">
+                        @Html.PagedListPager(Model, page => Url.Action("Index", new { page }), PagedListRenderOptions.OnlyShowFivePagesAtATime)
+                    </div>
+                }
+                else
+                {
+                    <p>Không có dữ liệu.</p>
+                }
             </div>
         </div>
     </section>

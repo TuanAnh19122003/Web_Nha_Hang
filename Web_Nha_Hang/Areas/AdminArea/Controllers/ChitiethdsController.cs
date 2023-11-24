@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PagedList;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -15,10 +16,15 @@ namespace Web_Nha_Hang.Areas.AdminArea.Controllers
         private DBConnectNhaHang db = new DBConnectNhaHang();
 
         // GET: AdminArea/Chitiethds
-        public ActionResult Index()
+        public ActionResult Index(int? page)
         {
-            var chitiethds = db.Chitiethds.Include(c => c.Hoadon);
-            return View(chitiethds.ToList());
+/*          var chitiethds = db.Chitiethds.Include(c => c.Hoadon);
+            return View(chitiethds.ToList());*/
+            int pageSize = 5;
+            int pageNumber = page ?? 1;
+            var model = db.Chitiethds.Include(c => c.Hoadon).OrderBy(c => c.macthd).ToPagedList(pageNumber, pageSize);
+
+            return View(model);
         }
 
         // GET: AdminArea/Chitiethds/Details/5

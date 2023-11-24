@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
+using PagedList;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
@@ -15,9 +16,12 @@ namespace Web_Nha_Hang.Areas.AdminArea.Controllers
         private DBConnectNhaHang db = new DBConnectNhaHang();
 
         // GET: AdminArea/Ban
-        public ActionResult Index()
+        public ActionResult Index(int? page)
         {
-            return View(db.Bans.ToList());
+            int pageSize = 5; // Số lượng sản phẩm trên mỗi trang
+            int pageNumber = (page ?? 1); // Số trang hiện tại, mặc định là 1 nếu không có giá trị
+            var model = db.Bans.OrderBy(b => b.maban).ToPagedList(pageNumber, pageSize);
+            return View(model);
         }
 
         // GET: AdminArea/Ban/Details/5

@@ -1,9 +1,22 @@
-﻿@model IEnumerable<Web_Nha_Hang.Models.Quyen>
-
+﻿@model PagedList.IPagedList<Web_Nha_Hang.Models.Quyen>
+@using PagedList.Mvc;
 @{
     ViewBag.Title = "Index";
     Layout = "~/Areas/AdminArea/Views/Shared/_LayoutAdmin.cshtml";
 }
+<style>
+    /* CSS nằm ở đây hoặc bạn có thể đặt trong file CSS riêng */
+    .pagination {
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        padding: 10px 0; /* Điều chỉnh giá trị này để thay đổi khoảng cách giữa các số trang */
+    }
+
+    .pagination a {
+        margin: 0 20px; /* Khoảng cách giữa các số trang */
+    }
+</style>
 <div class="content-wrapper">
     <!-- Main content -->
     <section class="content" style="padding-top:30px">
@@ -21,29 +34,39 @@
                 </div>
             </div>
             <div class="card-body">
-                <table class="table table-bordered">
-                    <tr>
-                        <th>
-                            @Html.DisplayNameFor(model => model.tenquyen)
-                        </th>
-                        <th>Chức năng</th>
-                    </tr>
-
-                    @foreach (var item in Model)
-                    {
+                @if (Model.Any())
+                {
+                    <table class="table table-bordered">
                         <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.tenquyen)
-                            </td>
-                            <td>
-                                <a href="@Url.Action("Edit", new { id = item.maquyen })" class="btn btn-warning"><i class="fas fa-edit"></i></a>
-                                <a href="@Url.Action("Details", new { id = item.maquyen })" class="btn btn-info"><i class="fas fa-info"></i></a>
-                                <a href="@Url.Action("Delete", new { id = item.maquyen })" class="btn btn-danger"><i class="fas fa-trash"></i></a>
-                            </td>
+                            <th>
+                                @Html.DisplayNameFor(model => model.First().tenquyen)
+                            </th>
+                            <th>Chức năng</th>
                         </tr>
-                    }
 
-                </table>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.tenquyen)
+                                </td>
+                                <td>
+                                    <a href="@Url.Action("Edit", new { id = item.maquyen })" class="btn btn-warning"><i class="fas fa-edit"></i></a>
+                                    <a href="@Url.Action("Details", new { id = item.maquyen })" class="btn btn-info"><i class="fas fa-info"></i></a>
+                                    <a href="@Url.Action("Delete", new { id = item.maquyen })" class="btn btn-danger"><i class="fas fa-trash"></i></a>
+                                </td>
+                            </tr>
+                        }
+
+                    </table>
+                    <div class="pagination">
+                        @Html.PagedListPager(Model, page => Url.Action("Index", new { page }), PagedListRenderOptions.OnlyShowFivePagesAtATime)
+                    </div>
+                }
+                else
+                {
+                    <p>Không có dữ liệu.</p>
+                }
             </div>
         </div>
     </section>
