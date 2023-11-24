@@ -9,6 +9,11 @@ namespace Web_Nha_Hang.Areas.AdminArea.Controllers
 {
     public class DefaultController : Controller
     {
+        public static class Roles
+        {
+            public const string Admin = "Admin";
+            public const string User = "User";
+        }
         private DBConnectNhaHang db = new DBConnectNhaHang();
         // GET: AdminArea/Default
         [HttpGet]
@@ -30,11 +35,17 @@ namespace Web_Nha_Hang.Areas.AdminArea.Controllers
             var acc = db.Nguoidungs.SingleOrDefault(x => x.taikhoan == user && x.matkhau == pass);
             System.Diagnostics.Debug.WriteLine($"Username: {user}, Password: {pass},ACC: { acc }");
             if (acc != null)
-            {
-                /*Session["user"] = acc;*/
-                /*return RedirectToAction("Index", "Dashbroad");*/
+            { 
                 Session["user"] = username;
-                return RedirectToAction("HomePage", "NhaHang", new { area = "" });
+                if (acc.maquyen==Roles.Admin)
+                {
+                    return RedirectToAction("Index", "Dashbroad");
+                    
+                }
+                else
+                {
+                    return RedirectToAction("HomePage", "NhaHang", new { area = "" });
+                }
 
             }
             else

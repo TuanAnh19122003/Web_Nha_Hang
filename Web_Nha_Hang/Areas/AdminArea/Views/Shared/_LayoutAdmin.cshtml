@@ -146,6 +146,12 @@
                         <i class="fas fa-th-large"></i>
                     </a>
                 </li>
+                <li class="nav-item" id="logoutLink">
+                    <a class="nav-link" href="#" role="button">
+                        <i class="fas fa-sign-out-alt"></i> Đăng xuất
+                    </a>
+                </li>
+
             </ul>
         </nav>
         <!-- /.navbar -->
@@ -888,6 +894,15 @@
         <!-- /.control-sidebar -->
     </div>
     <!-- ./wrapper -->
+    <script>
+        document.getElementById('logoutLink').addEventListener('click', function () {
+        // Gọi hàm đăng xuất khi liên kết được nhấn
+            logout();
+        });
+        function logout() {
+            window.location.href = '@Url.Action("Logout", "Default", new { area = "AdminArea" })';
+        }
+    </script>
     <script src="~/Theme/plugins/jquery/jquery.min.js"></script>
     <script src="~/Theme/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="~/Theme/dist/js/adminlte.min.js"></script>

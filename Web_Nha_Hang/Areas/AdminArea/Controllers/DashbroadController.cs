@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace Web_Nha_Hang.Areas.AdminArea.Controllers
 {
-    public class DashbroadController : Controller
+    public class DashbroadController : CheckLoginController
     {
         // GET: AdminArea/Dashbroad
         public ActionResult Index()
