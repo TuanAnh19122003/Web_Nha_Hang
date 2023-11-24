@@ -1,0 +1,78 @@
+﻿@model Web_Nha_Hang.Models.Datban
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/AdminArea/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="content-wrapper">
+    <!-- Main content -->
+    <section class="content" style="padding-top:30px">
+        <div class="card">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col-6 text-end">
+                        Thông tin chi tiết đặt bàn
+                    </div>
+                    <div class="col-6 float-end">
+                        <a href="@Url.Action("Edit", new { id = Model.maban })" class="btn btn-sm btn-success"> <i class="fas fa-edit"></i> Edit </a>
+                        <a href="@Url.Action("Index","Datban")" class="btn btn-sm btn-success"> <i class="fas fa-long-arrow-alt-left"></i> Back </a>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <dl class="row">
+                    <dt class="col-sm-3">
+                        @Html.DisplayNameFor(model => model.Ban.tenban)
+                    </dt>
+
+                    <dd class="col-sm-9">
+                        @Html.DisplayFor(model => model.Ban.tenban)
+                    </dd>
+
+                    <dt class="col-sm-3">
+                        @Html.DisplayNameFor(model => model.hoten)
+                    </dt>
+
+                    <dd class="col-sm-9">
+                        @Html.DisplayFor(model => model.hoten)
+                    </dd>
+
+                    <dt class="col-sm-3">
+                        @Html.DisplayNameFor(model => model.sdt)
+                    </dt>
+
+                    <dd class="col-sm-9">
+                        @Html.DisplayFor(model => model.sdt)
+                    </dd>
+
+                    <dt class="col-sm-3">
+                        @Html.DisplayNameFor(model => model.soluongkh)
+                    </dt>
+
+                    <dd class="col-sm-9">
+                        @Html.DisplayFor(model => model.soluongkh)
+                    </dd>
+
+                    <dt class="col-sm-3">
+                        @Html.DisplayNameFor(model => model.ngaydat)
+                    </dt>
+
+                    <dd class="col-sm-9">
+                        @Html.DisplayFor(model => model.ngaydat)
+                    </dd>
+
+                    <dt class="col-sm-3">
+                        @Html.DisplayNameFor(model => model.ghichu)
+                    </dt>
+
+                    <dd class="col-sm-9">
+                        @Html.DisplayFor(model => model.ghichu)
+                    </dd>
+
+                </dl>
+            </div>
+        </div>
+    </section>
+</div>
+

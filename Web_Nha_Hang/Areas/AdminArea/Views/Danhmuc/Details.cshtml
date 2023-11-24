@@ -1,0 +1,44 @@
+﻿@model Web_Nha_Hang.Models.Danhmuc
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/AdminArea/Views/Shared/_LayoutAdmin.cshtml";
+}
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Main content -->
+    <section class="content" style="padding-top:30px">
+
+        <!-- Default box -->
+        <div class="card">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col-6 text-end">
+                        Thông tin sản phẩm
+                    </div>
+                    <div class="col-6 float-end">
+                        <a href="@Url.Action("Edit", new { id = Model.madm })" class="btn btn-sm btn-success"> <i class="fas fa-edit"></i> Edit </a>
+                        <a href="@Url.Action("Index","Danhmuc")" class="btn btn-sm btn-success"> <i class="fas fa-long-arrow-alt-left"></i> Back</a>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <dl class="dl-horizontal">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.tendm)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.tendm)
+                    </dd>
+
+                </dl>
+            </div>
+            <!-- /.card-footer-->
+        </div>
+        <!-- /.card -->
+
+    </section>
+    <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->

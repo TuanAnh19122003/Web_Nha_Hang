@@ -1,0 +1,84 @@
+﻿@model Web_Nha_Hang.Models.Datban
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Areas/AdminArea/Views/Shared/_LayoutAdmin.cshtml";
+}
+<div class="content-wrapper">
+    <!-- Main content -->
+    <section class="content" style="padding-top:30px">
+        <div class="card">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col-6 text-end">
+                        Xóa đặt bàn
+                    </div>
+                    <div class="col-6 text-right">
+                        <a href="@Url.Action("Index","Datban")" class="btn btn-sm btn-success"> <i class="fas fa-long-arrow-alt-left"></i> Back</a>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <dl class="row">
+                    <dt class="col-sm-3">
+                        @Html.DisplayNameFor(model => model.Ban.tenban)
+                    </dt>
+
+                    <dd class="col-sm-9">
+                        @Html.DisplayFor(model => model.Ban.tenban)
+                    </dd>
+
+                    <dt class="col-sm-3">
+                        @Html.DisplayNameFor(model => model.hoten)
+                    </dt>
+
+                    <dd class="col-sm-9">
+                        @Html.DisplayFor(model => model.hoten)
+                    </dd>
+
+                    <dt class="col-sm-3">
+                        @Html.DisplayNameFor(model => model.sdt)
+                    </dt>
+
+                    <dd class="col-sm-9">
+                        @Html.DisplayFor(model => model.sdt)
+                    </dd>
+
+                    <dt class="col-sm-3">
+                        @Html.DisplayNameFor(model => model.soluongkh)
+                    </dt>
+
+                    <dd class="col-sm-9">
+                        @Html.DisplayFor(model => model.soluongkh)
+                    </dd>
+
+                    <dt class="col-sm-3">
+                        @Html.DisplayNameFor(model => model.ngaydat)
+                    </dt>
+
+                    <dd class="col-sm-9">
+                        @Html.DisplayFor(model => model.ngaydat)
+                    </dd>
+
+                    <dt class="col-sm-3">
+                        @Html.DisplayNameFor(model => model.ghichu)
+                    </dt>
+
+                    <dd class="col-sm-9">
+                        @Html.DisplayFor(model => model.ghichu)
+                    </dd>
+
+                </dl>
+
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div class="form-actions no-color">
+                        <input type="submit" value="Delete" class="btn btn-outline-danger" />
+                    </div>
+                }
+            </div>
+        </div>
+    </section>
+</div>

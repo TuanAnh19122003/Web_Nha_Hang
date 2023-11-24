@@ -1,0 +1,39 @@
+﻿@model Web_Nha_Hang.Models.Quyen
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/AdminArea/Views/Shared/_LayoutAdmin.cshtml";
+}
+<div class="content-wrapper">
+    <!-- Main content -->
+    <section class="content" style="padding-top:30px">
+
+        <!-- Default box -->
+        <div class="card">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col-6 text-end">
+                        TEN
+                    </div>
+                    <div class="col-6 float-end">
+                        <a href="@Url.Action("Edit", new { id = Model.maquyen })" class="btn btn-sm btn-success"> <i class="fas fa-edit"></i> Edit </a>
+                        <a href="@Url.Action("Index","Quyen")" class="btn btn-sm btn-success"> <i class="fas fa-long-arrow-alt-left"></i> Back</a>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <dl class="dl-horizontal">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.tenquyen)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.tenquyen)
+                    </dd>
+
+                </dl>
+            </div>
+        </div>
+    </section>
+</div>
+

@@ -1,0 +1,88 @@
+﻿@model Web_Nha_Hang.Models.Datban
+@using Web_Nha_Hang.Models
+
+@{
+    ViewBag.Title = "Reserve_a_table";
+    Layout = "~/Views/Shared/_LayoutPageNhaHang.cshtml";
+}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css" integrity="correct-integrity-value" crossorigin="anonymous" />
+@using (Html.BeginForm("Reserve_a_table", "NhaHang", FormMethod.Post, new { @class = "reservation-form", id = "reservationForm" }))
+{
+    <div class="container" style="padding-top:200px;padding-bottom:30px">
+        <div class="row">
+            <div class="col-md-6">
+                <!-- Hiển thị ảnh -->
+                <img src="~/Theme/images/anh_dat_ban.jpg" style="height:630px" alt="Restaurant Image" class="img-fluid" />
+            </div>
+            <div class="col-md-6">
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.maban, "Bàn")
+                    @Html.DropDownList("maban", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.maban, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.hoten)
+                    @Html.EditorFor(model => model.hoten, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.hoten, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.sdt)
+                    @Html.EditorFor(model => model.sdt, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.sdt, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.soluongkh)
+                    @Html.EditorFor(model => model.soluongkh, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.soluongkh, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ngaydat)
+                    <input type="text" id="ngaydat" name="ngaydat" class="form-control datetimepicker-input" data-target="#ngaydat" />
+                    @Html.ValidationMessageFor(model => model.ngaydat, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ghichu)
+                    @Html.TextAreaFor(model => model.ghichu, new { @class = "form-control", @rows = 4 })
+                    @Html.ValidationMessageFor(model => model.ghichu, "", new { @class = "text-danger" })
+                </div>
+
+
+                <div class="text-center">
+                    <button type="button" class="btn btn-primary" onclick="validateForm()">Đặt bàn</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="correct-integrity-value" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js" integrity="correct-integrity-value" crossorigin="anonymous"></script>
+
+<script>
+    $(document).ready(function () {
+        // Initialize DateTimePicker
+        $('#ngaydat').datetimepicker({
+            format: 'YYYY-MM-DD HH:mm',  // Specify the desired format
+            sideBySide: true  // Show time and date side by side
+        });
+    });
+
+    function validateForm() {
+        // Kiểm tra điều kiện trước khi submit form
+        var maban = $('select[name="maban"]').val();
+        var hoten = $('input[name="hoten"]').val();
+        var sdt = $('input[name="sdt"]').val();
+        var soluongkh = $('input[name="soluongkh"]').val();
+        var ngaydat = $('input[name="ngaydat"]').val();
+
+        if (maban === "" || hoten === "" || sdt === "" || soluongkh === "" || ngaydat === "") {
+            alert("Vui lòng nhập đầy đủ thông tin.");
+        } else {
+            // Submit form nếu thông tin đầy đủ
+            $('#reservationForm').submit();
+        }
+    }
+</script>

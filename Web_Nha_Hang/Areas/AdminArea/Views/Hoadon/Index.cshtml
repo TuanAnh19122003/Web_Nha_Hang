@@ -1,0 +1,66 @@
+﻿@model IEnumerable<Web_Nha_Hang.Models.Hoadon>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/AdminArea/Views/Shared/_LayoutAdmin.cshtml";
+}
+<div class="content-wrapper">
+    <section class="content"  style="padding-top:30px">
+        <div class="card">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col-6 text-end text-danger text-uppercase">
+                        Danh sách hóa đơn
+                    </div>
+                    <div class="col-6 text-right">
+                        <a href="@Url.Action("Create","Hoadon")" class="btn btn-success"><i class="fas fa-plus"></i> Thêm</a>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <table class="table table-bordered">
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Khachhang.tenkh)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Nhanvien.macv)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.ngaythanhtoan)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.tongtien)
+                        </th>
+                        <th>Chức năng</th>
+                    </tr>
+
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Khachhang.tenkh)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Nhanvien.macv)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ngaythanhtoan)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.tongtien)
+                            </td>
+                            <td>
+                                <a href="@Url.Action("Edit", new { id = item.mahd })" class="btn btn-warning"><i class="fas fa-edit"></i></a>
+                                <a href="@Url.Action("Details", new { id = item.mahd })" class="btn btn-info"><i class="fas fa-info"></i></a>
+                                <a href="@Url.Action("Delete", new { id = item.mahd })" class="btn btn-danger"><i class="fas fa-trash"></i></a>
+                            </td>
+                        </tr>
+                    }
+
+                </table>
+
+            </div>
+        </div>
+    </section>
+</div>

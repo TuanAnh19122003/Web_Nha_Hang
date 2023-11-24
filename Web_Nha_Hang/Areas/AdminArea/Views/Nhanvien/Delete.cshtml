@@ -1,0 +1,91 @@
+﻿@model Web_Nha_Hang.Models.Nhanvien
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Areas/AdminArea/Views/Shared/_LayoutAdmin.cshtml";
+}
+<div class="content-wrapper">
+    <!-- Main content -->
+    <section class="content" style="padding-top:30px">
+        <div class="card">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col-6 text-end">
+                        Xóa nhân viên
+                    </div>
+                    <div class="col-6 text-right">
+                        <a href="@Url.Action("Index","Nhanvien")" class="btn btn-sm btn-success"> <i class="fas fa-long-arrow-alt-left"></i> Back</a>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <dl class="row">
+                    <dt class="col-sm-3">
+                        @Html.DisplayNameFor(model => model.Chucvu.tencv)
+                    </dt>
+
+                    <dd class="col-sm-9">
+                        @Html.DisplayFor(model => model.Chucvu.tencv)
+                    </dd>
+
+                    <dt class="col-sm-3">
+                        @Html.DisplayNameFor(model => model.tennv)
+                    </dt>
+
+                    <dd class="col-sm-9">
+                        @Html.DisplayFor(model => model.tennv)
+                    </dd>
+
+                    <dt class="col-sm-3">
+                        @Html.DisplayNameFor(model => model.anh)
+                    </dt>
+
+                    <dd class="col-sm-9">
+                        <img src="@Url.Content("~/Uploads/" + Model.anh)" alt="Image" class="img-thumbnail" width="100" height="100" />
+                    </dd>
+
+                    <dt class="col-sm-3">
+                        @Html.DisplayNameFor(model => model.sdt)
+                    </dt>
+
+                    <dd class="col-sm-9">
+                        @Html.DisplayFor(model => model.sdt)
+                    </dd>
+
+                    <dt class="col-sm-3">
+                        @Html.DisplayNameFor(model => model.diachi)
+                    </dt>
+
+                    <dd class="col-sm-9">
+                        @Html.DisplayFor(model => model.diachi)
+                    </dd>
+
+                    <dt class="col-sm-3">
+                        @Html.DisplayNameFor(model => model.gioitinh)
+                    </dt>
+
+                    <dd class="col-sm-9">
+                        @Html.DisplayFor(model => model.gioitinh)
+                    </dd>
+
+                    <dt class="col-sm-3">
+                        @Html.DisplayNameFor(model => model.ngsinh)
+                    </dt>
+
+                    <dd class="col-sm-9">
+                        @Html.DisplayFor(model => model.ngsinh)
+                    </dd>
+
+                </dl>
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div class="form-actions no-color">
+                        <input type="submit" value="Delete" class="btn btn-default" /> 
+                    </div>
+                }
+            </div>
+        </div>
+    </section>
+</div>

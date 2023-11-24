@@ -1,0 +1,47 @@
+﻿@model Web_Nha_Hang.Models.Quyen
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Areas/AdminArea/Views/Shared/_LayoutAdmin.cshtml";
+}
+<div class="content-wrapper">
+    <!-- Main content -->
+    <section class="content" style="padding-top:30px">
+
+        <!-- Default box -->
+        <div class="card">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col-6 text-end">
+                        TEN
+                    </div>
+                    <div class="col-6 float-end">
+                        LINK
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <dl class="dl-horizontal">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.tenquyen)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.tenquyen)
+                    </dd>
+
+                </dl>
+                <h3>Are you sure you want to delete this?</h3>
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div class="form-actions no-color">
+                        <button type="submit" class="btn btn-danger">Delete</button> |
+                        <a href="@Url.Action("Index","Quyen")" class="btn btn-group-sm btn-success"> <i class="fas fa-long-arrow-alt-left"></i> Back</a>
+                    </div>
+                }
+            </div>
+        </div>
+    </section>
+</div>

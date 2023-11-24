@@ -1,0 +1,61 @@
+﻿@model IEnumerable<Web_Nha_Hang.Models.Nguoidung>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/AdminArea/Views/Shared/_LayoutAdmin.cshtml";
+}
+<div class="content-wrapper">
+    <!-- Main content -->
+    <section class="content" style="padding-top:30px">
+        <div class="card">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col-6 text-end">
+                        Danh mục người dùng
+                    </div>
+                    <div class="col-6 text-right">
+                        <a href="@Url.Action("Create","Nguoidung_user")" class="btn btn-success"><i class="fas fa-plus"></i> Thêm</a>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <table class="table table-bordered">
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.taikhoan)
+                        </th>
+                        <th>
+                            Hình ảnh
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.email)
+                        </th>
+                        <th>Chức năng</th>
+                    </tr>
+
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.taikhoan)
+                            </td>
+                            <td>
+                                <img src="@Url.Content("~/Uploads/" + item.anh)" alt="Image" class="img-thumbnail" width="100" height="100" />
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.email)
+                            </td>
+                            <td>
+                                <a href="@Url.Action("Edit", new { id = item.mand })" class="btn btn-warning"><i class="fas fa-edit"></i></a>
+                                <a href="@Url.Action("Details", new { id = item.mand })" class="btn btn-info"><i class="fas fa-info"></i></a>
+                                <a href="@Url.Action("Delete", new { id = item.mand })" class="btn btn-danger"><i class="fas fa-trash"></i></a>
+                            </td>
+                        </tr>
+                    }
+
+                </table>
+            </div>
+        </div>
+    </section>
+</div>
+

@@ -1,0 +1,70 @@
+﻿@model Web_Nha_Hang.Models.Nguoidung
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Areas/AdminArea/Views/Shared/_LayoutAdmin.cshtml";
+}
+<div class="content-wrapper">
+    <!-- Main content -->
+    <section class="content" style="padding-top:30px">
+        <div class="card">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col-6 text-end">
+                        Xóa người dùng
+                    </div>
+                    <div class="col-6 text-right">
+                        <a href="@Url.Action("Index", "Nguoidung_user")" class="btn btn-sm btn-success"><i class="fas fa-long-arrow-alt-left"></i> Back</a>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <dl class="row">
+                    <dt class="col-sm-3">
+                        @Html.DisplayNameFor(model => model.Quyen.tenquyen)
+                    </dt>
+                    <dd class="col-sm-9">
+                        @Html.DisplayFor(model => model.Quyen.tenquyen)
+                    </dd>
+
+                    <dt class="col-sm-3">
+                        @Html.DisplayNameFor(model => model.taikhoan)
+                    </dt>
+                    <dd class="col-sm-9">
+                        @Html.DisplayFor(model => model.taikhoan)
+                    </dd>
+
+                    <dt class="col-sm-3">
+                        @Html.DisplayNameFor(model => model.matkhau)
+                    </dt>
+                    <dd class="col-sm-9">
+                        @Html.DisplayFor(model => model.matkhau)
+                    </dd>
+
+                    <dt class="col-sm-3">
+                        @Html.DisplayNameFor(model => model.anh)
+                    </dt>
+                    <dd class="col-sm-9">
+                        <img src="@Url.Content("~/Uploads/" + Model.anh)" alt="Image" class="img-thumbnail" width="100" height="100" />
+                    </dd>
+
+                    <dt class="col-sm-3">
+                        @Html.DisplayNameFor(model => model.email)
+                    </dt>
+                    <dd class="col-sm-9">
+                        @Html.DisplayFor(model => model.email)
+                    </dd>
+                </dl>
+
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div class="form-actions no-color text-center mt-3">
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </div>
+                }
+            </div>
+        </div>
+    </section>
+</div>

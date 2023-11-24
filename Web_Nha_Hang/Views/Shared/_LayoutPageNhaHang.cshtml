@@ -2,7 +2,7 @@
 
 <html>
 <head>
-    <title>Nhà Hàng Yunxi</title>
+    <title>Nhà Hàng Yunxi - @ViewBag.Title</title>
     <!-- for-mobile-apps -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -30,8 +30,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i&amp;subset=cyrillic,cyrillic-ext,greek,greek-ext,latin-ext,vietnamese" rel="stylesheet">
     <!-- //google fonts -->
     @RenderSection("header", required: false)
+<style>
+    body{
+        font-family: "Roboto",-apple-system,BlinkMacSystemFont,"Segoe UI","Helvetica Neue","Arial","Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol",sans-serif !important;
+    }
+</style>
 </head>
-    
+ 
 <body>
     <!-- header -->
     <div class="header-top">
@@ -62,25 +67,37 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
     <!-- nav -->
     <header class="py-sm-3 pt-3 pb-2">
-        <div class="container">
+        <div class="container" style="justify-content:center; align-items:center">
             <div id="logo">
-                <a href="/NhaHang/HomePage"><img src="~/Theme/img/Comida China ˃-˂.jpg" alt="Logo" /></a>
+                <a href="/NhaHang/HomePage"><img src="~/Theme/img/logo-nha-hang-28.jpg" alt="Logo" style="height:100px; width:200px" /></a>
             </div>
             <!-- nav -->
             <nav class="d-lg-flex">
                 <label for="drop" class="toggle"><span class="fa fa-bars"></span></label>
                 <input type="checkbox" id="drop" />
-                <ul class="menu mt-2 ml-auto">
+                <ul class="menu mt-2 ml-auto" style="padding-top:30px">
                     <li class="active"><a href="/NhaHang/HomePage">Trang chủ</a></li>
                     <li class=""><a href="/NhaHang/Introduce">Giới thiệu</a></li>
-                    <li class=""><a href="#">Thực đơn</a></li>
+                    <li class=""><a href="/NhaHang/Menu">Thực đơn</a></li>
                     <li class=""><a href="/NhaHang/Blog">Blog</a></li>
-                    <li class=""><a href="#">Ưu đãi</a></li>
+                    <li class=""><a href="/NhaHang/SpecialOffer">Ưu đãi</a></li>
                     <li class=""><a href="/NhaHang/Contact">Liên hệ</a></li>
-                    <li class=""><a href="#">Đặt bàn</a></li>
-                    <li class=""><a href="#"><i class="fa fa-user"></i></a></li>
+                    <li class=""><a href="/NhaHang/Reserve_a_table">Đặt bàn</a></li>
+                    @if (Session["user"] != null)
+                    {
+                        // User is authenticated, show logout link
+                        @*var username = Session["user"] as string;
+                        <li class=""><a href="#" id="loggedInUser">{{ username }}</a></li>*@
+                        <li class=""><a href="/AdminArea/Default/Logout"><i class="fa fa-sign-out"></i> Đăng xuất</a></li>
+                    }
+                    else
+                    {
+                        // User is not authenticated, show login link
+                        <li class=""><a href="/AdminArea/Default/Login"><i class="fa fa-user"></i></a></li>
+                    }
+
                 </ul>
-                <div class="login-icon ml-2">
+                <div class="login-icon ml-2" style="padding-top:30px">
                     <a class="user" href="#"> Call Us</a>
                 </div>
             </nav>
@@ -95,14 +112,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         <div class="container py-sm-3">
             <div class="row footer-grids">
                 <div class="col-lg-3 col-sm-6 mb-lg-0 mb-sm-5 mb-4">
-                    <h4 class="mb-4"><span class="fa fa-cutlery"></span> Crispy</h4>
+                    <h4 class="mb-4"><span class="fa fa-cutlery"></span> YunXi</h4>
                     <p class="mb-3">Onec Consequat sapien ut cursus rhoncus. Nullam dui mi, vulputate ac metus semper quis luctus sed.</p>
                     <h5>Trusted by <span>500+ People</span> </h5>
                 </div>
                 <div class="col-lg-3 col-sm-6 mb-md-0 mb-sm-5 mb-4">
                     <h4 class="mb-4">Address Info</h4>
-                    <p><span class="fa mr-2 fa-map-marker"></span>64d canal street TT 3356 <span>Newyork, NY.</span></p>
-                    <p class="phone py-2"><span class="fa mr-2 fa-phone"></span> +1(12) 123 456 789 </p>
+                    <p><span class="fa mr-2 fa-map-marker"></span>64 Nguyễn Chí Thanh <span>Hà Nội, HN</span></p>
+                    <p class="phone py-2"><span class="fa mr-2 fa-phone"></span> +84 43 181 163 </p>
                     <p><span class="fa mr-2 fa-envelope"></span><a href="mailto:info@example.com">info@example.com</a></p>
                 </div>
                 <div class="col-lg-2 col-sm-6 mb-lg-0 mb-sm-5 mb-4">

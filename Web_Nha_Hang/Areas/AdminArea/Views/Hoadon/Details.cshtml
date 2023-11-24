@@ -1,0 +1,61 @@
+﻿@model Web_Nha_Hang.Models.Hoadon
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/AdminArea/Views/Shared/_LayoutAdmin.cshtml";
+}
+<div class="content-wrapper">
+    <!-- Main content -->
+    <section class="content" style="padding-top:30px">
+        <div class="card">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col-6 text-end">
+                        Thông tin hóa đơn
+                    </div>
+                    <div class="col-6 float-end">
+                        <a href="@Url.Action("Edit", new { id = Model.mahd })" class="btn btn-sm btn-success"> <i class="fas fa-edit"></i> Edit </a>
+                        <a href="@Url.Action("Index","Hoadon")" class="btn btn-sm btn-success"> <i class="fas fa-long-arrow-alt-left"></i> Back </a>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <dl class="row">
+                    <dt class="col-sm-3">
+                        @Html.DisplayNameFor(model => model.Khachhang.tenkh)
+                    </dt>
+
+                    <dd class="col-sm-9">
+                        @Html.DisplayFor(model => model.Khachhang.tenkh)
+                    </dd>
+
+                    <dt class="col-sm-3">
+                        @Html.DisplayNameFor(model => model.Nhanvien.macv)
+                    </dt>
+
+                    <dd class="col-sm-9">
+                        @Html.DisplayFor(model => model.Nhanvien.macv)
+                    </dd>
+
+                    <dt class="col-sm-3">
+                        @Html.DisplayNameFor(model => model.ngaythanhtoan)
+                    </dt>
+
+                    <dd class="col-sm-9">
+                        @Html.DisplayFor(model => model.ngaythanhtoan)
+                    </dd>
+
+                    <dt class="col-sm-3">
+                        @Html.DisplayNameFor(model => model.tongtien)
+                    </dt>
+
+                    <dd class="col-sm-9">
+                        @Html.DisplayFor(model => model.tongtien)
+                    </dd>
+
+                </dl>
+            </div>
+        </div>
+    </section>
+</div>
+

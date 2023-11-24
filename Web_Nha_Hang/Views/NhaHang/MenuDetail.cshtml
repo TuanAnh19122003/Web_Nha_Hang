@@ -1,0 +1,56 @@
+﻿
+@{
+    ViewBag.Title = "MenuDetail";
+    Layout = "~/Views/Shared/_LayoutPageNhaHang.cshtml";
+}
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<style>
+    /* Tùy chỉnh CSS cho giao diện đẹp hơn */
+    .product-container {
+        background-color: #f8f9fa;
+        border-radius: 10px;
+        padding: 20px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .product-image {
+        border-radius: 10px;
+        overflow: hidden;
+    }
+
+    .product-info {
+        padding-left: 20px;
+    }
+
+    /* Hiệu ứng hover cho nút quay lại */
+    .back-btn:hover {
+        transform: scale(1.1);
+    }
+</style>
+
+<div class="container mt-5" style="padding-top:150px;padding-bottom:50px">
+    <div class="row">
+        <div class="col-md-8 mx-auto product-container">
+            <!-- Nút quay lại -->
+            <a href="@Url.Action("Menu", "NhaHang")" class="btn btn-primary back-btn mb-3">Quay lại</a>
+
+            <div class="row">
+                <!-- Cột chứa ảnh sản phẩm -->
+                <div class="col-md-6 product-image">
+                    <img src="@Url.Content("~/Uploads/" + Model.anh)" alt="Image" class="img-fluid" style="width: 400px; height: 300px;">
+                </div>
+                <!-- Cột chứa thông tin sản phẩm -->
+                <div class="col-md-6 product-info">
+                    <h3 class="text-primary">@Model.tenmon</h3>
+                    <p class="font-weight-bold text-danger">Giá: @Model.giatien</p>
+                    <p class="text-muted text-bg-success">Mô tả: @Model.mota</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>

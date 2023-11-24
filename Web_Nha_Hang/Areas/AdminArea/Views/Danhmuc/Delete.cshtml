@@ -1,0 +1,52 @@
+﻿@model Web_Nha_Hang.Models.Danhmuc
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Areas/AdminArea/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Main content -->
+        <section class="content" style="padding-top:30px">
+            <!-- Default box -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col-6 text-end">
+                            <h2>Xóa Danh mục</h2>
+                        </div>
+                        <div class="col-6 text-right">
+                            <a href="@Url.Action("Index","Danhmuc")" class="btn btn-sm btn-success"> <i class="fas fa-long-arrow-alt-left"></i> Back</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-body">
+                    <h3>Are you sure you want to delete this?</h3>
+
+                    <dl class="dl-horizontal mt-4">
+                        <dt>
+                            @Html.DisplayNameFor(model => model.tendm)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.tendm)
+                        </dd>
+                    </dl>
+
+                    <div class="form-actions no-color mt-4">
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </div>
+                </div>
+                <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+        </section>
+        <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+}

@@ -1,0 +1,73 @@
+﻿@model Web_Nha_Hang.Models.Monan
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/AdminArea/Views/Shared/_LayoutAdmin.cshtml";
+}
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Main content -->
+    <section class="content" style="padding-top:30px">
+        <div class="card">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col-6 text-end">
+                        Thông tin chi tiết món ăn
+                    </div>
+                    <div class="col-6 float-end">
+                        <a href="@Url.Action("Edit", new { id = Model.mamon })" class="btn btn-sm btn-success"> <i class="fas fa-edit"></i> Edit </a>
+                        <a href="@Url.Action("Index","Monan")" class="btn btn-sm btn-success"> <i class="fas fa-long-arrow-alt-left"></i> Back </a>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <dl class="row">
+                    <dt class="col-sm-3">
+                        @Html.DisplayNameFor(model => model.Danhmuc.tendm)
+                    </dt>
+
+                    <dd class="col-sm-9">
+                        @Html.DisplayFor(model => model.Danhmuc.tendm)
+                    </dd>
+
+                    <dt class="col-sm-3">
+                        @Html.DisplayNameFor(model => model.tenmon)
+                    </dt>
+
+                    <dd class="col-sm-9">
+                        @Html.DisplayFor(model => model.tenmon)
+                    </dd>
+
+                    <dt class="col-sm-3">
+                        @Html.DisplayNameFor(model => model.anh)
+                    </dt>
+
+                    <dd class="col-sm-9">
+                        <img src="@Url.Content("~/Uploads/" + Model.anh)" alt="Image" class="img-thumbnail" width="100" height="100" />
+                    </dd>
+
+                    <dt class="col-sm-3">
+                        @Html.DisplayNameFor(model => model.giatien)
+                    </dt>
+
+                    <dd class="col-sm-9">
+                        @Html.DisplayFor(model => model.giatien)
+                    </dd>
+
+                    <dt class="col-sm-3">
+                        @Html.DisplayNameFor(model => model.mota)
+                    </dt>
+
+                    <dd class="col-sm-9">
+                        @Html.DisplayFor(model => model.mota)
+                    </dd>
+                </dl>
+            </div>
+            <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+    </section>
+    <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+

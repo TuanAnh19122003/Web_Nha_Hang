@@ -1,0 +1,66 @@
+﻿@model IEnumerable<Web_Nha_Hang.Models.Monan>
+
+@{
+    ViewBag.Title = "Menu";
+    Layout = "~/Views/Shared/_LayoutPageNhaHang.cshtml";
+}
+
+<div class="container" style="padding-top:150px">
+    <!-- Thêm dropdown để chọn loại -->
+    <div class="form-group pb-3">
+        <label for="loaiMon">Chọn loại món:</label>
+        <select class="form-control p-2" id="loaiMon">
+            <option value="all">Tất cả</option>
+            @foreach (var danhMuc in ViewBag.ListDanhMuc)
+            {
+                <option value="@danhMuc.madm">@danhMuc.tendm</option>
+            }
+        </select>
+    </div>
+
+    <div class="row">
+        @foreach (var monAn in Model)
+        {
+            <div class="col-md-4 mb-4" data-loaimon="@monAn.Danhmuc.madm">
+                <div class="card" style="padding: 10px; border-radius: 10px; background-color: whitesmoke;">
+                    <img src="@Url.Content("~/Uploads/" + monAn.anh)" alt="Image" class="card-img-top" style="height: 200px; border-radius:10px ;width:100%; object-fit: cover;">
+                    <div class="card-body">
+                        <h5 class="card-title">@monAn.tenmon</h5>
+                        <p class="card-text">Giá: @monAn.giatien</p>
+                        @*                        <p class="card-text">Danh mục: @monAn.Danhmuc.tendm</p>*@
+                        <button class="btn btn-primary btn-sm btn-details" data-id="@monAn.mamon">Chi tiết</button>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+<!-- Trong file Views/NhaHang/Menu.cshtml -->
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#loaiMon').change(function () {
+            var selectedLoaiMon = $(this).val();
+
+            if (selectedLoaiMon === 'all') {
+                $('.col-md-4').show();
+            } else {
+                $('.col-md-4').hide();
+                $('.col-md-4[data-loaimon="' + selectedLoaiMon + '"]').show();
+            }
+        });
+    });
+    $(document).ready(function () {
+        // ... (đoạn code hiện tại)
+
+        // Thêm sự kiện click cho nút chi tiết
+        $('.btn-details').click(function () {
+            var productId = $(this).data('id');
+
+            // Chuyển hướng đến trang chi tiết sản phẩm
+            window.location.href = '/NhaHang/MenuDetail/' + productId;
+        });
+    });
+</script>
+
+

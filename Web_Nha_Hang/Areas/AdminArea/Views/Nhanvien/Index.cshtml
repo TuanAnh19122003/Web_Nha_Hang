@@ -1,0 +1,84 @@
+﻿@model IEnumerable<Web_Nha_Hang.Models.Nhanvien>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/AdminArea/Views/Shared/_LayoutAdmin.cshtml";
+}
+<div class="content-wrapper">
+    <!-- Main content -->
+    <section class="content" style="padding-top:30px">
+        <div class="card">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col-6 text-end text-danger text-uppercase">
+                        Danh sách nhân viên
+                    </div>
+                    <div class="col-6 text-right">
+                        <a href="@Url.Action("Create","Nhanvien")" class="btn btn-success"><i class="fas fa-plus"></i> Thêm</a>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <table class="table table-bordered">
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Chucvu.tencv)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.tennv)
+                        </th>
+                        <th>
+                            Hình ảnh
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.sdt)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.diachi)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.gioitinh)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.ngsinh)
+                        </th>
+                        <th>Chức năng</th>
+                    </tr>
+
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Chucvu.tencv)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.tennv)
+                            </td>
+                            <td>
+                                <img src="@Url.Content("~/Uploads/" + item.anh)" alt="Image" class="img-thumbnail" width="100" height="100" />
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.sdt)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.diachi)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.gioitinh)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ngsinh)
+                            </td>
+                            <td>
+                                <a href="@Url.Action("Edit", new { id = item.manv })" class="btn btn-warning"><i class="fas fa-edit"></i></a>
+                                <a href="@Url.Action("Details", new { id = item.manv })" class="btn btn-info"><i class="fas fa-info"></i></a>
+                                <a href="@Url.Action("Delete", new { id = item.manv })" class="btn btn-danger"><i class="fas fa-trash"></i></a>
+                            </td>
+                        </tr>
+                    }
+
+                </table>
+            </div>
+        </div>
+    </section>
+</div>

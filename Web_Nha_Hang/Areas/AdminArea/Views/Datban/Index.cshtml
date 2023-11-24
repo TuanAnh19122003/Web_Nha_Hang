@@ -1,0 +1,80 @@
+﻿@model IEnumerable<Web_Nha_Hang.Models.Datban>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/AdminArea/Views/Shared/_LayoutAdmin.cshtml";
+}
+<div class="content-wrapper">
+    <!-- Main content -->
+    <section class="content"  style="padding-top:30px">
+
+        <!-- Default box -->
+        <div class="card">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col-6 text-end text-danger text-uppercase">
+                        Danh sách bàn
+                    </div>
+                    <div class="col-6 text-right">
+                        <a href="@Url.Action("Create","Datban")" class="btn btn-success"><i class="fas fa-plus"></i> Thêm</a>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <table class="table table-bordered">
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Ban.tenban)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.hoten)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.sdt)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.soluongkh)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.ngaydat)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.ghichu)
+                        </th>
+                        <th>Chức năng</th>
+                    </tr>
+
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Ban.tenban)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.hoten)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.sdt)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.soluongkh)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ngaydat)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ghichu)
+                            </td>
+                            <td>
+                                <a href="@Url.Action("Edit", new { id = item.madb })" class="btn btn-warning"><i class="fas fa-edit"></i></a>
+                                <a href="@Url.Action("Details", new { id = item.madb })" class="btn btn-info"><i class="fas fa-info"></i></a>
+                                <a href="@Url.Action("Delete", new { id = item.madb })" class="btn btn-danger"><i class="fas fa-trash"></i></a>
+                            </td>
+                        </tr>
+                    }
+
+                </table>
+            </div>
+        </div>
+    </section>
+</div>

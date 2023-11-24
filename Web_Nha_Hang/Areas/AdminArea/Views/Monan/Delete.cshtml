@@ -1,0 +1,58 @@
+﻿@model Web_Nha_Hang.Models.Monan
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Areas/AdminArea/Views/Shared/_LayoutAdmin.cshtml";
+}
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="content-wrapper">
+        <!-- Main content -->
+        <section class="content" style="padding-top:30px">
+            <div class="card">
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col-6 text-end">
+                            <h3 class="card-title">Xóa món ăn</h3>
+                        </div>
+                        <div class="col-6 float-end">
+                            <div class="form-actions no-color">
+                                <input type="submit" value="Delete" class="btn btn-danger" /> |
+                                @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-secondary" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <table class="table table-bordered">
+                        <tr>
+                            <th>@Html.DisplayNameFor(model => model.Danhmuc.tendm)</th>
+                            <td>@Html.DisplayFor(model => model.Danhmuc.tendm)</td>
+                        </tr>
+
+                        <tr>
+                            <th>@Html.DisplayNameFor(model => model.tenmon)</th>
+                            <td>@Html.DisplayFor(model => model.tenmon)</td>
+                        </tr>
+
+                        <tr>
+                            <th>@Html.DisplayNameFor(model => model.anh)</th>
+                            <td><img src="@Url.Content("~/Uploads/" + Model.anh)" alt="Image" class="img-thumbnail" width="100" height="100" /></td>
+                        </tr>
+
+                        <tr>
+                            <th>@Html.DisplayNameFor(model => model.giatien)</th>
+                            <td>@Html.DisplayFor(model => model.giatien)</td>
+                        </tr>
+
+                        <tr>
+                            <th>@Html.DisplayNameFor(model => model.mota)</th>
+                            <td>@Html.DisplayFor(model => model.mota)</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </div>
+} 

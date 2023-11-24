@@ -1,0 +1,73 @@
+﻿@model IEnumerable<Web_Nha_Hang.Models.Monan>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/AdminArea/Views/Shared/_LayoutAdmin.cshtml";
+}
+<div class="content-wrapper">
+    <!-- Main content -->
+    <section class="content" style="padding-top:30px">
+
+        <!-- Default box -->
+        <div class="card">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col-6 text-end">
+                        Danh sách món ăn
+                    </div>
+                    <div class="col-6 text-right">
+                        <a href="@Url.Action("Create","Monan")" class="btn btn-success"><i class="fas fa-plus"></i> Thêm</a>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <table class="table table-bordered">
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.tenmon)
+                        </th>
+                        <th>
+                            Hình ảnh
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.giatien)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.mota)
+                        </th>
+                        <th>Chức năng</th>
+                    </tr>
+
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.tenmon)
+                            </td>
+                            <td>
+                                <img src="@Url.Content("~/Uploads/" + item.anh)" alt="Image" class="img-thumbnail" width="100" height="100" />
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.giatien)
+                            </td>
+                            <td style="width:400px">
+                                @Html.DisplayFor(modelItem => item.mota)
+                            </td>
+                            <td>
+                                <a href="@Url.Action("Edit", new { id = item.mamon })" class="btn btn-warning"><i class="fas fa-edit"></i></a>
+                                <a href="@Url.Action("Details", new { id = item.mamon })" class="btn btn-info"><i class="fas fa-info"></i></a>
+                                <a href="@Url.Action("Delete", new { id = item.mamon })" class="btn btn-danger"><i class="fas fa-trash"></i></a>
+                            </td>
+                        </tr>
+                    }
+
+                </table>
+            </div>
+            <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+    </section>
+    <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+

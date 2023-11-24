@@ -25,7 +25,9 @@ body a {
 }
 
 body img {
-    max-width: 100%;
+	max-width: 100%;
+	width: 520px;
+	height: 500px;
 }
 
 a:hover {
@@ -432,7 +434,9 @@ li > a:only-child:after { content: ''; }
     background-size: cover;
 }
 .banner-text-agile img {
-    border-radius: 50%;
+	border-radius: 50%;
+	width: 510px;
+	height: 470px;
 }
 .layer1 {
     background: rgba(0, 0, 0, 0.4);
@@ -992,7 +996,7 @@ footer,.copyright{
 
 /*-- About page --*/
 .innerpage-banner {
-    background: url(../images/innerbg.jpg) no-repeat center;
+    background: url(../images/about_header1.jpg) no-repeat center;
     background-size: cover;
     min-height: 300px;
 }
