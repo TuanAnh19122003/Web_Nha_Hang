@@ -19,12 +19,20 @@ namespace Web_Nha_Hang.Areas.AdminArea.Controllers
         [HttpGet]
         public ActionResult Login()
         {
-            //Nếu đăng nhập rồi thì không cần đăng nhập lại vào thẳng trang
             if (Session["user"] != null)
             {
-                /*return RedirectToAction("Index", "Dashbroad");*/
-                return RedirectToAction("HomePage", "NhaHang", new { area = "" });
+                var role = Session["userRole"] as string;
+
+                if (role == Roles.Admin)
+                {
+                    return RedirectToAction("Index", "Dashbroad");
+                }
+                else if (role == Roles.User)
+                {
+                    return RedirectToAction("HomePage", "NhaHang", new { area = "" });
+                }
             }
+
             return View();
         }
         [HttpPost]
@@ -37,6 +45,7 @@ namespace Web_Nha_Hang.Areas.AdminArea.Controllers
             if (acc != null)
             { 
                 Session["user"] = username;
+                Session["userRole"] = acc.maquyen;
                 if (acc.maquyen==Roles.Admin)
                 {
                     return RedirectToAction("Index", "Dashbroad");
