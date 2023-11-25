@@ -12,7 +12,7 @@ namespace Web_Nha_Hang.Areas.AdminArea.Controllers
         public static class Roles
         {
             public const string Admin = "Admin";
-            public const string User = "User";
+            public const string User = "Member";
         }
         private DBConnectNhaHang db = new DBConnectNhaHang();
         // GET: AdminArea/Default

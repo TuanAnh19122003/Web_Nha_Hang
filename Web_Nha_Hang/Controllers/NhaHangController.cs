@@ -53,18 +53,25 @@ namespace Web_Nha_Hang.Controllers
         }
         public ActionResult Reserve_a_table([Bind(Include = "madb,maban,hoten,sdt,soluongkh,ngaydat,ghichu")] Datban datban)
         {
-
-            if (ModelState.IsValid)
+            if (Session["user"] == null)
             {
-                db.Datbans.Add(datban);
-                db.SaveChanges();
-                return RedirectToAction("Reserve_a_table");
+                /*return RedirectToAction("Index", "Dashbroad");*/
+                return RedirectToAction("Login", "Default", new { area = "AdminArea" });
             }
+            else
+            {
+                if (ModelState.IsValid)
+                {
+                    db.Datbans.Add(datban);
+                    db.SaveChanges();
+                    return RedirectToAction("Reserve_a_table");
+                }
 
-            ModelState.Clear();
-            TempData["SuccessMessage"] = "Đặt bàn thành công!";
-            ViewBag.maban = new SelectList(db.Bans, "maban", "tenban", datban.maban);
-            return View(datban);
+                ModelState.Clear();
+                TempData["SuccessMessage"] = "Đặt bàn thành công!";
+                ViewBag.maban = new SelectList(db.Bans, "maban", "tenban", datban.maban);
+                return View(datban);
+            }
         }
 
     }
