@@ -21,18 +21,9 @@ namespace Web_Nha_Hang.Areas.AdminArea.Controllers
         {
             if (Session["user"] != null)
             {
-                var role = Session["userRole"] as string;
-
-                if (role == Roles.Admin)
-                {
-                    return RedirectToAction("Index", "Dashbroad");
-                }
-                else if (role == Roles.User)
-                {
-                    return RedirectToAction("HomePage", "NhaHang", new { area = "" });
-                }
+                /*return RedirectToAction("Index", "Dashbroad");*/
+                return RedirectToAction("HomePage", "NhaHang", new { area = "" });
             }
-
             return View();
         }
         [HttpPost]
@@ -41,15 +32,14 @@ namespace Web_Nha_Hang.Areas.AdminArea.Controllers
             var user = username;
             var pass = password;
             var acc = db.Nguoidungs.SingleOrDefault(x => x.taikhoan == user && x.matkhau == pass);
-            System.Diagnostics.Debug.WriteLine($"Username: {user}, Password: {pass},ACC: { acc }");
+            System.Diagnostics.Debug.WriteLine($"Username: {user}, Password: {pass},ACC: {acc}");
             if (acc != null)
-            { 
+            {
                 Session["user"] = username;
-                Session["userRole"] = acc.maquyen;
-                if (acc.maquyen==Roles.Admin)
+                if (acc.maquyen == Roles.Admin)
                 {
                     return RedirectToAction("Index", "Dashbroad");
-                    
+
                 }
                 else
                 {
