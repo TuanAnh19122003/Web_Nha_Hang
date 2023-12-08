@@ -1,10 +1,22 @@
-﻿@model IEnumerable<Web_Nha_Hang.Models.Monan>
-
+﻿@model PagedList.IPagedList<Web_Nha_Hang.Models.Monan>
+@using PagedList.Mvc
 @{
     ViewBag.Title = "Menu";
     Layout = "~/Views/Shared/_LayoutPageNhaHang.cshtml";
 }
+<style>
+    /* CSS nằm ở đây hoặc bạn có thể đặt trong file CSS riêng */
+    .pagination {
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        padding: 10px 0; /* Điều chỉnh giá trị này để thay đổi khoảng cách giữa các số trang */
+    }
 
+        .pagination a {
+            margin: 0 20px; /* Khoảng cách giữa các số trang */
+        }
+</style>
 <div class="container" style="padding-top:150px">
     <!-- Thêm dropdown để chọn loại -->
     <div class="form-group pb-3">
@@ -33,6 +45,9 @@
                 </div>
             </div>
         }
+    </div>
+    <div class="text-center">
+        @Html.PagedListPager(Model, page => Url.Action("Menu", new { page }), PagedListRenderOptions.ClassicPlusFirstAndLast)
     </div>
 </div>
 <!-- Trong file Views/NhaHang/Menu.cshtml -->

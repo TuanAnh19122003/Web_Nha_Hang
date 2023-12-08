@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Web_Nha_Hang.Models;
-
+using PagedList;
 namespace Web_Nha_Hang.Controllers
 {
     public class NhaHangController : Controller
@@ -33,10 +33,12 @@ namespace Web_Nha_Hang.Controllers
         {
             return View();
         }
-        public ActionResult Menu()
+        public ActionResult Menu(int? page)
         {
-            var listMenu = new DBConnectNhaHang().Monans.Include("DanhMuc").ToList();
-            var listDanhMuc = new DBConnectNhaHang().Danhmucs.ToList(); // Thay DBConnectNhaHang bằng tên phù hợp
+            int pageSize = 6;
+            int pageNumber = (page ?? 1);
+            var listMenu = new DBConnectNhaHang().Monans.Include("DanhMuc").ToList().ToPagedList(pageNumber, pageSize);
+            var listDanhMuc = new DBConnectNhaHang().Danhmucs.ToList();
             ViewBag.ListDanhMuc = listDanhMuc;
             return View(listMenu);
         }
