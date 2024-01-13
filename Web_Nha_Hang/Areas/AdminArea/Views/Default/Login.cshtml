@@ -8,15 +8,27 @@
 <div class="container" style=" background: linear-gradient(90deg, #C7C5F4, #776BCC);">
     <div class="screen" style=" background: linear-gradient(90deg, #5D54A4, #7C78B8);">
         <div class="screen__content">
-            <form class="login" method="post" action="@Url.Action("Login","Default")" >
+            <form class="login" method="post" action="@Url.Action("Login","Default")">
                 <div class="login__field">
                     <i class="login__icon fas fa-user"></i>
                     <input type="text" name="username" class="login__input" placeholder="User name / Email">
                 </div>
+                @if (!string.IsNullOrEmpty(ViewBag.ErrorMessage))
+                {
+                    <div class="alert alert-danger" role="alert">
+                        @ViewBag.ErrorMessage
+                    </div>
+                }
                 <div class="login__field">
                     <i class="login__icon fas fa-lock"></i>
                     <input type="password" name="password" class="login__input" placeholder="Password">
                 </div>
+                @if (!string.IsNullOrEmpty(ViewBag.ErrorMessage))
+                {
+                    <div class="alert alert-danger" role="alert">
+                        @ViewBag.ErrorMessage
+                    </div>
+                }
                 <button type="submit" class="button login__submit">
                     <span class="button__text">Log In Now</span>
                     <i class="button__icon fas fa-chevron-right"></i>

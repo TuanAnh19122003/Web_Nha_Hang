@@ -49,6 +49,7 @@ namespace Web_Nha_Hang.Areas.AdminArea.Controllers
             }
             else
             {
+                ViewBag.ErrorMessage = "Sai tài khoản hoặc mật khẩu.Vui lòng thử lại";
                 return View();
             }
         }
